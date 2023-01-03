@@ -1,4 +1,29 @@
-#welcomeText{
--fx-font-size:20px;
--fx-font-weight:bold;
+*{
+-fx-background-color: white;
+-fx-text-fill: black;
+-fx-font-size: 15px;
 }
+#time{
+}
+.button{
+-fx-color: #8D021F;
+-fx-text-decoration: none;
+-fx-background-color: gray;
+}
+  .button:hover{
+-fx-background-color: #800000;
+  }
+ .time_start_button{
+-fx-border-color:black;
+ }
+ .time_end_button{
+  }
+ .textfield{
+ -fx-opacity:0.5;
+ }
+ .save_button{
+ -fx-background-color: green;
+ }
+ .cancel_button{
+  -fx-background-color: red;
+  }
