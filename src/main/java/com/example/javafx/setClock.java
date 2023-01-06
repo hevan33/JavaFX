@@ -5,11 +5,11 @@ import java.util.List;
 
 public class setClock {
     protected String time;
-    protected String[] days = new String[7];
+    protected List<String> days = new ArrayList<>();
     protected int volume;
     protected String name;
 
-    public setClock(String time, String[] days, int volume, String name) {
+    public setClock(String time, List<String> days, int volume, String name) {
         this.time = time;
         this.days = days;
         this.volume = volume;
@@ -24,11 +24,11 @@ public class setClock {
         this.time = time;
     }
 
-    public String[] getDays() {
+    public List<String> getDays() {
         return days;
     }
 
-    public void setDays(String[] days) {
+    public void setDays(List<String> days) {
         this.days = days;
     }
 

@@ -3,8 +3,6 @@
 -fx-text-fill: black;
 -fx-font-size: 15px;
 }
-#time{
-}
 .button{
 -fx-color: #8D021F;
 -fx-text-decoration: none;
@@ -26,4 +24,8 @@
  }
  .cancel_button{
   -fx-background-color: red;
+  }
+  .DayOfTheWeek{
+  -fx-background-color: white;
+  -fx-color:white;
   }

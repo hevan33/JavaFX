@@ -9,6 +9,7 @@
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.control.Slider?>
 <?import javafx.scene.control.CheckBox?>
+<?import javafx.scene.control.RadioButton?>
 <GridPane fx:controller="com.example.javafx.HelloController"
           xmlns:fx="http://javafx.com/fxml" alignment="center"
           hgap="15" vgap="15" stylesheets="@style.css">
@@ -25,21 +26,21 @@
             GridPane.rowIndex="0" GridPane.columnIndex="3" GridPane.columnSpan="1" onAction="#subtract"/>
 
     <Label text="Day of the week" GridPane.columnIndex="0"
-           GridPane.rowIndex="1"/>
-    <CheckBox text="Pn" allowIndeterminate="true" indeterminate="true" style="-fx-color:black;"
-            GridPane.rowIndex="1" GridPane.columnIndex="1" GridPane.columnSpan="5"/>
-    <CheckBox text="Wt" styleClass="DayOfTheWeek"
-            GridPane.rowIndex="1" GridPane.columnIndex="2" GridPane.columnSpan="1" onAction="#mark"/>
-    <CheckBox text="Sr" styleClass="DayOfTheWeek"
-            GridPane.rowIndex="1" GridPane.columnIndex="3" GridPane.columnSpan="1" onAction="#mark"/>
-    <CheckBox text="Cz" styleClass="DayOfTheWeek"
-            GridPane.rowIndex="1" GridPane.columnIndex="4" GridPane.columnSpan="1" onAction="#mark"/>
-    <CheckBox text="Pi" styleClass="DayOfTheWeek"
-            GridPane.rowIndex="1" GridPane.columnIndex="5" GridPane.columnSpan="1" onAction="#mark"/>
-    <CheckBox text="Sb" styleClass="DayOfTheWeek"
-            GridPane.rowIndex="1" GridPane.columnIndex="6" GridPane.columnSpan="1" onAction="#mark"/>
-    <CheckBox text="Ni" styleClass="DayOfTheWeek"
-            GridPane.rowIndex="1" GridPane.columnIndex="7" GridPane.columnSpan="1" onAction="#mark"/>
+           GridPane.rowIndex="1" />
+    <Button fx:id="pn" text="Pn" styleClass="button_day"
+            GridPane.rowIndex="1" GridPane.columnIndex="1" GridPane.columnSpan="1" onAction="#addPn"/>
+    <Button fx:id="wt" text="Wt" styleClass="button_day"
+            GridPane.rowIndex="1" GridPane.columnIndex="2" GridPane.columnSpan="1" onAction="#addWt"/>
+    <Button fx:id="sr" text="Sr" styleClass="button_day"
+            GridPane.rowIndex="1" GridPane.columnIndex="3" GridPane.columnSpan="1" onAction="#addSr"/>
+    <Button fx:id="cz" text="Cz" styleClass="button_day"
+            GridPane.rowIndex="1" GridPane.columnIndex="4" GridPane.columnSpan="1" onAction="#addCz"/>
+    <Button fx:id="pi" text="Pi" styleClass="button_day"
+            GridPane.rowIndex="1" GridPane.columnIndex="5" GridPane.columnSpan="1" onAction="#addPi"/>
+    <Button fx:id="sb" text="Sb" styleClass="button_day"
+            GridPane.rowIndex="1" GridPane.columnIndex="6" GridPane.columnSpan="1" onAction="#addSb"/>
+    <Button fx:id="ni" text="Ni" styleClass="button_day"
+            GridPane.rowIndex="1" GridPane.columnIndex="7" GridPane.columnSpan="1" onAction="#addNi"/>
 
     <Label text="Change volume" GridPane.columnIndex="0"
      GridPane.rowIndex="2"/>

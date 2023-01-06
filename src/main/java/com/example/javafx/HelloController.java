@@ -24,16 +24,25 @@ public class HelloController {
     @FXML
     private Slider volume;
     @FXML
-    private String[] days = new String[7];
+    private List<String> days = new ArrayList<>();
     @FXML
     private TextField name;
     @FXML
     private Button closeButton;
-
-
     @FXML
-    void mark(){
-    }
+    private Button pn;
+    @FXML
+    private Button wt;
+    @FXML
+    private Button sr;
+    @FXML
+    private Button cz;
+    @FXML
+    private Button pi;
+    @FXML
+    private Button sb;
+    @FXML
+    private Button ni;
     @FXML
     void add(){
         String s = new String(time.getText());
@@ -66,6 +75,46 @@ public class HelloController {
         else if(hour>=10&&minute<10){time.setText(Integer.toString((hour)) + ":" + "0" + (Integer.toString(minute)));}
     }
     @FXML
+    void addPn(){
+        addBorder(pn);
+        days.add("Poniedzialek");
+    }
+    @FXML
+    void addWt(){
+        addBorder(wt);
+        days.add("Wtorek");
+    }
+    @FXML
+    void addSr(){
+        addBorder(sr);
+        days.add("Sroda");
+    }
+    @FXML
+    void addCz(){
+        addBorder(cz);
+        days.add("Czwartek");
+    }
+    @FXML
+    void addPi(){
+        addBorder(pi);
+        days.add("Piatek");
+    }
+    @FXML
+    void addSb(){
+        addBorder(sb);
+        days.add("Sobota");
+    }
+    @FXML
+    void addNi(){
+        addBorder(ni);
+        days.add("Niedziela");
+    }
+    @FXML
+    void addBorder(Button b){
+        b.setBorder(new Border(new BorderStroke(Color.RED,
+                BorderStrokeStyle.SOLID, CornerRadii.EMPTY, BorderWidths.DEFAULT)));
+    }
+    @FXML
     void save(){
         setClock clock = new setClock(time.getText(),days, (int)volume.getValue(), name.getText());
         Clock.add(clock);
@@ -75,7 +124,22 @@ public class HelloController {
     void cancel(){
         time.setText("00:00");
         volume.setValue(0);
-        name.setText(" ");
+        name.setText("name");
+        days.clear();
+        pn.setBorder(new Border(new BorderStroke(Color.WHITE,
+                BorderStrokeStyle.SOLID, CornerRadii.EMPTY, BorderWidths.DEFAULT)));
+        wt.setBorder(new Border(new BorderStroke(Color.WHITE,
+                BorderStrokeStyle.SOLID, CornerRadii.EMPTY, BorderWidths.DEFAULT)));
+        sr.setBorder(new Border(new BorderStroke(Color.WHITE,
+                BorderStrokeStyle.SOLID, CornerRadii.EMPTY, BorderWidths.DEFAULT)));
+        cz.setBorder(new Border(new BorderStroke(Color.WHITE,
+                BorderStrokeStyle.SOLID, CornerRadii.EMPTY, BorderWidths.DEFAULT)));
+        pi.setBorder(new Border(new BorderStroke(Color.WHITE,
+                BorderStrokeStyle.SOLID, CornerRadii.EMPTY, BorderWidths.DEFAULT)));
+        sb.setBorder(new Border(new BorderStroke(Color.WHITE,
+                BorderStrokeStyle.SOLID, CornerRadii.EMPTY, BorderWidths.DEFAULT)));
+        ni.setBorder(new Border(new BorderStroke(Color.WHITE,
+                BorderStrokeStyle.SOLID, CornerRadii.EMPTY, BorderWidths.DEFAULT)));
     };
     @FXML
     void quit(){
@@ -84,8 +148,8 @@ public class HelloController {
             System.out.println("Czas rozpoczecia: " + o.time);
             System.out.println("Głośność: " + o.volume);
             System.out.println("Uruchamia się w dniach:");
-            for(String s : o.days){
-                System.out.print(s + " ");
+            for(String s : days){
+                System.out.println(s + " ");
             }
         }
         Stage stage = (Stage) closeButton.getScene().getWindow();
