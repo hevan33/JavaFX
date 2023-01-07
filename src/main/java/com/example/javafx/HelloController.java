@@ -47,6 +47,7 @@ public class HelloController {
         }else{hourMinutes[1]++;}
         setTime(hourMinutes[1] ,hourMinutes[0]);
     }
+    // funkcja dodająca czas za pomocą kliknięcia w odpowiedni przycisk
     @FXML
     public void subtract(){
         int[] hourMinutes = convertString();
@@ -57,6 +58,7 @@ public class HelloController {
         }else{hourMinutes[1]--;}
         setTime(hourMinutes[1] ,hourMinutes[0]);
     }
+    // funkcja odejmująca czas za pomocą kliknięcia w odpowiedni przycisk
     @FXML
     public int[] convertString(){
         String s = new String(time.getText());
@@ -66,6 +68,7 @@ public class HelloController {
         hourMinutes[1] = Integer.parseInt(new String(s.substring(3,5)));
         return hourMinutes;
     }
+    // funkcja konwertująca i pobierająca wartość z pola TextField
     @FXML
     public static boolean isNumeric(String strNum) {
         if (strNum == null) {
@@ -78,6 +81,7 @@ public class HelloController {
         }
         return true;
     }
+    // obsługa wyjątku w sytuacji, kiedy w polu z czasem pojawi się wartość inna niż liczba
     @FXML
     public void setTime(int minute, int hour){
         if(hour>=10&&minute>=10){time.setText(Integer.toString(hour) + ":" + (Integer.toString(minute)));}
@@ -85,6 +89,7 @@ public class HelloController {
         else if(hour<10&&minute<10){time.setText("0" + Integer.toString((hour)) + ":" + "0" + Integer.toString(minute));}
         else if(hour>=10&&minute<10){time.setText(Integer.toString((hour)) + ":" + "0" + (Integer.toString(minute)));}
     }
+    // funkcja edytująca atrybut text przy polu TextField zawierającym czas
     @FXML
     public void addPn(){
         addBorder(pn);
@@ -120,11 +125,20 @@ public class HelloController {
         addBorder(ni);
         days.add("Niedziela");
     }
+    // metody dodające do tablicy zaznaczone przez użytkownika dni w których ma dzwonić budzik, później ta tablica jest
+    // wyświetlana przy parametrach budzika
     @FXML
     public void addBorder(Button b){
         b.setBorder(new Border(new BorderStroke(Color.RED,
                 BorderStrokeStyle.SOLID, CornerRadii.EMPTY, BorderWidths.DEFAULT)));
     }
+    // metoda dodająca obramowanie
+    @FXML
+    public void deleteBorder(Button b){
+        b.setBorder(new Border(new BorderStroke(Color.TRANSPARENT,
+                BorderStrokeStyle.SOLID, CornerRadii.EMPTY, BorderWidths.DEFAULT)));
+    }
+    // metoda usuwająca obramowanie
     @FXML
     public void save(){
         int[] hourMinutes = convertString();
@@ -137,28 +151,22 @@ public class HelloController {
         setClock clock = new setClock(time.getText(),days, (int)volume.getValue(), name.getText());
         Clock.add(clock);
     };
-
+    //funkcja pobierająca parametry wybrane przez użytkownika i tworząca budzik
     @FXML
     public void cancel(){
         time.setText("00:00");
         volume.setValue(0);
         name.setText(" ");
         days.clear();
-        pn.setBorder(new Border(new BorderStroke(Color.TRANSPARENT,
-                BorderStrokeStyle.SOLID, CornerRadii.EMPTY, BorderWidths.DEFAULT)));
-        wt.setBorder(new Border(new BorderStroke(Color.TRANSPARENT,
-                BorderStrokeStyle.SOLID, CornerRadii.EMPTY, BorderWidths.DEFAULT)));
-        sr.setBorder(new Border(new BorderStroke(Color.TRANSPARENT,
-                BorderStrokeStyle.SOLID, CornerRadii.EMPTY, BorderWidths.DEFAULT)));
-        cz.setBorder(new Border(new BorderStroke(Color.TRANSPARENT,
-                BorderStrokeStyle.SOLID, CornerRadii.EMPTY, BorderWidths.DEFAULT)));
-        pi.setBorder(new Border(new BorderStroke(Color.TRANSPARENT,
-                BorderStrokeStyle.SOLID, CornerRadii.EMPTY, BorderWidths.DEFAULT)));
-        sb.setBorder(new Border(new BorderStroke(Color.TRANSPARENT,
-                BorderStrokeStyle.SOLID, CornerRadii.EMPTY, BorderWidths.DEFAULT)));
-        ni.setBorder(new Border(new BorderStroke(Color.TRANSPARENT,
-                BorderStrokeStyle.SOLID, CornerRadii.EMPTY, BorderWidths.DEFAULT)));
+        deleteBorder(pn);
+        deleteBorder(wt);
+        deleteBorder(sr);
+        deleteBorder(cz);
+        deleteBorder(pn);
+        deleteBorder(sb);
+        deleteBorder(ni);
     };
+    //funkcja przywracająca domyślny wygląd okna, tj. bez zmian wprowadzonych przez użytkownika
     @FXML
     public void quit(){
         for(setClock o : Clock){
@@ -173,5 +181,6 @@ public class HelloController {
         Stage stage = (Stage) closeButton.getScene().getWindow();
         stage.close();
     }
+    //metoda uruchamiana poprzez naciśniecię przycisku close, zamyka okno i parametry zapisanych budzików
 
 }
