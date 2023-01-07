@@ -1,13 +1,7 @@
 package com.example.javafx;
 
-import javafx.event.EventHandler;
 import javafx.fxml.FXML;
-import javafx.scene.control.Button;
-import javafx.scene.control.Label;
-import javafx.scene.control.Slider;
-import javafx.scene.control.TextField;
-import javafx.scene.input.MouseButton;
-import javafx.scene.input.MouseEvent;
+import javafx.scene.control.*;
 import javafx.scene.layout.*;
 import javafx.scene.paint.Color;
 import javafx.stage.Stage;
@@ -44,105 +38,129 @@ public class HelloController {
     @FXML
     private Button ni;
     @FXML
-    void add(){
-        String s = new String(time.getText());
-        int hour = Integer.parseInt(new String(s.substring(0,2)));
-        int minute = Integer.parseInt(new String(s.substring(3,5)));
-        if(minute == 59){
-            if(hour == 23){hour = 0;}
-            else{ hour++;}
-            minute = 0;
-        }else{minute++;}
-        setTime(minute ,hour);
+    public void add(){
+        int[] hourMinutes = convertString();
+        if(hourMinutes[1] == 59){
+            if(hourMinutes[0] == 23){hourMinutes[0] = 0;}
+            else{ hourMinutes[0]++;}
+            hourMinutes[1] = 0;
+        }else{hourMinutes[1]++;}
+        setTime(hourMinutes[1] ,hourMinutes[0]);
     }
     @FXML
-    void subtract(){
-        String s = new String(time.getText());
-        int hour = Integer.parseInt(new String(s.substring(0,2)));
-        int minute = Integer.parseInt(new String(s.substring(3,5)));
-        if(minute == 0){
-            if(hour == 0){hour = 23;}
-            else{ hour--;}
-            minute = 59;
-        }else{minute--;}
-        setTime(minute ,hour);
+    public void subtract(){
+        int[] hourMinutes = convertString();
+        if(hourMinutes[1]== 0){
+            if(hourMinutes[0] == 0){hourMinutes[0] = 23;}
+            else{ hourMinutes[0]--;}
+            hourMinutes[1] = 59;
+        }else{hourMinutes[1]--;}
+        setTime(hourMinutes[1] ,hourMinutes[0]);
     }
     @FXML
-    void setTime(int minute, int hour){
+    public int[] convertString(){
+        String s = new String(time.getText());
+        isNumeric(s);
+        int[] hourMinutes = new int[2];
+        hourMinutes[0] = Integer.parseInt(new String(s.substring(0,2)));
+        hourMinutes[1] = Integer.parseInt(new String(s.substring(3,5)));
+        return hourMinutes;
+    }
+    @FXML
+    public static boolean isNumeric(String strNum) {
+        if (strNum == null) {
+            return false;
+        }
+        try {
+            double d = Double.parseDouble(strNum);
+        } catch (NumberFormatException nfe) {
+            return false;
+        }
+        return true;
+    }
+    @FXML
+    public void setTime(int minute, int hour){
         if(hour>=10&&minute>=10){time.setText(Integer.toString(hour) + ":" + (Integer.toString(minute)));}
         else if(hour<10&&minute>=10){time.setText("0" + Integer.toString((hour)) + ":" + (Integer.toString(minute)));}
         else if(hour<10&&minute<10){time.setText("0" + Integer.toString((hour)) + ":" + "0" + Integer.toString(minute));}
         else if(hour>=10&&minute<10){time.setText(Integer.toString((hour)) + ":" + "0" + (Integer.toString(minute)));}
     }
     @FXML
-    void addPn(){
+    public void addPn(){
         addBorder(pn);
         days.add("Poniedzialek");
     }
     @FXML
-    void addWt(){
+    public void addWt(){
         addBorder(wt);
         days.add("Wtorek");
     }
     @FXML
-    void addSr(){
+    public void addSr(){
         addBorder(sr);
         days.add("Sroda");
     }
     @FXML
-    void addCz(){
+    public void addCz(){
         addBorder(cz);
         days.add("Czwartek");
     }
     @FXML
-    void addPi(){
+    public void addPi(){
         addBorder(pi);
         days.add("Piatek");
     }
     @FXML
-    void addSb(){
+    public void addSb(){
         addBorder(sb);
         days.add("Sobota");
     }
     @FXML
-    void addNi(){
+    public void addNi(){
         addBorder(ni);
         days.add("Niedziela");
     }
     @FXML
-    void addBorder(Button b){
+    public void addBorder(Button b){
         b.setBorder(new Border(new BorderStroke(Color.RED,
                 BorderStrokeStyle.SOLID, CornerRadii.EMPTY, BorderWidths.DEFAULT)));
     }
     @FXML
-    void save(){
+    public void save(){
+        int[] hourMinutes = convertString();
+        if(hourMinutes[0]<0 || hourMinutes[1]<0 || hourMinutes[0]>24 || hourMinutes[1]>24){
+            Alert errorAlert = new Alert(Alert.AlertType.ERROR);
+            errorAlert.setHeaderText("Input not valid");
+            errorAlert.setContentText("The size of First Name must be between 2 and 25 characters");
+            errorAlert.showAndWait();
+        }
         setClock clock = new setClock(time.getText(),days, (int)volume.getValue(), name.getText());
         Clock.add(clock);
     };
 
     @FXML
-    void cancel(){
+    public void cancel(){
         time.setText("00:00");
         volume.setValue(0);
-        name.setText("name");
+        name.setText(" ");
         days.clear();
-        pn.setBorder(new Border(new BorderStroke(Color.WHITE,
+        pn.setBorder(new Border(new BorderStroke(Color.TRANSPARENT,
                 BorderStrokeStyle.SOLID, CornerRadii.EMPTY, BorderWidths.DEFAULT)));
-        wt.setBorder(new Border(new BorderStroke(Color.WHITE,
+        wt.setBorder(new Border(new BorderStroke(Color.TRANSPARENT,
                 BorderStrokeStyle.SOLID, CornerRadii.EMPTY, BorderWidths.DEFAULT)));
-        sr.setBorder(new Border(new BorderStroke(Color.WHITE,
+        sr.setBorder(new Border(new BorderStroke(Color.TRANSPARENT,
                 BorderStrokeStyle.SOLID, CornerRadii.EMPTY, BorderWidths.DEFAULT)));
-        cz.setBorder(new Border(new BorderStroke(Color.WHITE,
+        cz.setBorder(new Border(new BorderStroke(Color.TRANSPARENT,
                 BorderStrokeStyle.SOLID, CornerRadii.EMPTY, BorderWidths.DEFAULT)));
-        pi.setBorder(new Border(new BorderStroke(Color.WHITE,
+        pi.setBorder(new Border(new BorderStroke(Color.TRANSPARENT,
                 BorderStrokeStyle.SOLID, CornerRadii.EMPTY, BorderWidths.DEFAULT)));
-        sb.setBorder(new Border(new BorderStroke(Color.WHITE,
+        sb.setBorder(new Border(new BorderStroke(Color.TRANSPARENT,
                 BorderStrokeStyle.SOLID, CornerRadii.EMPTY, BorderWidths.DEFAULT)));
-        ni.setBorder(new Border(new BorderStroke(Color.WHITE,
+        ni.setBorder(new Border(new BorderStroke(Color.TRANSPARENT,
                 BorderStrokeStyle.SOLID, CornerRadii.EMPTY, BorderWidths.DEFAULT)));
     };
     @FXML
-    void quit(){
+    public void quit(){
         for(setClock o : Clock){
             System.out.println("Budzik o nazwie: " + o.name);
             System.out.println("Czas rozpoczecia: " + o.time);
