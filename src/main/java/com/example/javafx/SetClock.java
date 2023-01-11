@@ -3,13 +3,13 @@ package com.example.javafx;
 import java.util.ArrayList;
 import java.util.List;
 
-public class setClock {
+public class SetClock {
     protected String time;
     protected List<String> days = new ArrayList<>();
     protected int volume;
     protected String name;
 
-    public setClock(String time, List<String> days, int volume, String name) {
+    public SetClock(String time, List<String> days, int volume, String name) {
         this.time = time;
         this.days = days;
         this.volume = volume;

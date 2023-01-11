@@ -14,7 +14,7 @@ public class HelloController {
     @FXML
     private TextField time;
     @FXML
-    private List<setClock> Clock = new ArrayList<>();
+    private List<SetClock> Clock = new ArrayList<>();
     @FXML
     private Slider volume;
     @FXML
@@ -148,7 +148,7 @@ public class HelloController {
             errorAlert.setContentText("The size of First Name must be between 2 and 25 characters");
             errorAlert.showAndWait();
         }
-        setClock clock = new setClock(time.getText(),days, (int)volume.getValue(), name.getText());
+        SetClock clock = new SetClock(time.getText(),days, (int)volume.getValue(), name.getText());
         Clock.add(clock);
     };
     //funkcja pobierająca parametry wybrane przez użytkownika i tworząca budzik
@@ -162,14 +162,14 @@ public class HelloController {
         deleteBorder(wt);
         deleteBorder(sr);
         deleteBorder(cz);
-        deleteBorder(pn);
+        deleteBorder(pi);
         deleteBorder(sb);
         deleteBorder(ni);
     };
     //funkcja przywracająca domyślny wygląd okna, tj. bez zmian wprowadzonych przez użytkownika
     @FXML
     public void quit(){
-        for(setClock o : Clock){
+        for(SetClock o : Clock){
             System.out.println("Budzik o nazwie: " + o.name);
             System.out.println("Czas rozpoczecia: " + o.time);
             System.out.println("Głośność: " + o.volume);
